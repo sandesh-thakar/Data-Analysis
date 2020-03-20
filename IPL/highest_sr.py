@@ -3,7 +3,15 @@ import pandas as pd
 deliveries = pd.read_csv('deliveries.csv')
 matches = pd.read_csv('matches.csv')
 
-deliveries = deliveries[deliveries['wide_runs'] == 0]
+matches_2019 = matches[matches['season'] >= 2019]
+
+mat_19 = []
+
+for i in range(len(matches_2019)):
+    mat_19.append(matches_2019.iloc[i,0])
+
+deliveries = deliveries[deliveries['match_id'].isin(mat_19)]
+deliveries = deliveries[deliveries['wide_runs']==0]
 
 batsmen = set()
 
@@ -31,7 +39,7 @@ for i in range(len(deliveries)):
     if(get_over<=6):
         batsman_data[get_batsman]['runs_pp'] += get_runs
         batsman_data[get_batsman]['balls_pp'] += 1
-    elif(get_over<=15):
+    elif(get_over>=7 and get_over<=15):
         batsman_data[get_batsman]['runs_mid'] += get_runs
         batsman_data[get_batsman]['balls_mid'] += 1
     else:
@@ -63,7 +71,22 @@ for i in range(len(data)):
         
 powerplay_sr = pd.DataFrame(powerplay_sr,columns=['batsman','pp_runs','pp_balls','pp_sr'])
 
-powerplay_sr = powerplay_sr[powerplay_sr['pp_balls']>=300]
+powerplay_sr = powerplay_sr[powerplay_sr['pp_balls']>=200]
+
+
+
+middle_sr = []
+
+for i in range(len(data)):
+    if(data.iloc[i,6]!=0):
+        middle_sr.append([data.iloc[i,0],data.iloc[i,5],data.iloc[i,6], \
+                             data.iloc[i,5]*100/data.iloc[i,6]])
+        
+middle_sr = pd.DataFrame(middle_sr,columns=['batsman','middle_runs','middle_balls','middle_sr'])
+
+middle_sr = middle_sr[middle_sr['middle_balls']>=200]
+
+
 
 
 death_sr = []
@@ -75,4 +98,4 @@ for i in range(len(data)):
         
 death_sr = pd.DataFrame(death_sr,columns=['batsman','do_runs','do_balls','do_sr'])
 
-death_sr = death_sr[death_sr['do_balls']>=180]
+death_sr = death_sr[death_sr['do_balls']>=60]
