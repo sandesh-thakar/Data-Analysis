@@ -1,9 +1,11 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 deliveries = pd.read_csv('deliveries.csv')
 matches = pd.read_csv('matches.csv')
 
-matches_2019 = matches[matches['season'] >= 2019]
+matches_2019 = matches[matches['season'] >= 2018]
 
 mat_19 = []
 
@@ -71,7 +73,7 @@ for i in range(len(data)):
         
 powerplay_sr = pd.DataFrame(powerplay_sr,columns=['batsman','pp_runs','pp_balls','pp_sr'])
 
-powerplay_sr = powerplay_sr[powerplay_sr['pp_balls']>=200]
+powerplay_sr = powerplay_sr[powerplay_sr['pp_balls']>=120]
 
 
 
@@ -84,7 +86,7 @@ for i in range(len(data)):
         
 middle_sr = pd.DataFrame(middle_sr,columns=['batsman','middle_runs','middle_balls','middle_sr'])
 
-middle_sr = middle_sr[middle_sr['middle_balls']>=200]
+middle_sr = middle_sr[middle_sr['middle_balls']>=150]
 
 
 
@@ -99,3 +101,27 @@ for i in range(len(data)):
 death_sr = pd.DataFrame(death_sr,columns=['batsman','do_runs','do_balls','do_sr'])
 
 death_sr = death_sr[death_sr['do_balls']>=60]
+
+
+powerplay_sr.sort_values('pp_sr', axis = 0, ascending = False, \
+                 inplace = True, na_position ='last') 
+
+x_data = [powerplay_sr.iloc[i,3] for i in range(10,-1,-1)]
+y_data = [powerplay_sr.iloc[i,0] for i in range(10,-1,-1)]
+y_pos = np.arange(len(y_data))
+
+
+colors = ['black','pink','orange','red','orange','red','blue','red','blue','red','blue']
+colors.reverse()
+
+# Create horizontal bars
+plt.barh(y_pos, x_data,color=colors)
+ 
+
+plt.title("Highest SR in the powerplay since 2018 (min 120 balls)")
+
+# Create names on the y-axis
+plt.yticks(y_pos, y_data)
+ 
+# Show graphic
+plt.show()
