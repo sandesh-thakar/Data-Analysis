@@ -63,4 +63,3 @@ plt.ylabel('Wickets')
 plt.title('Rashid Khan Wickets by Over')
 
 plt.show()
-    

@@ -3,7 +3,7 @@ import pandas as pd
 deliveries = pd.read_csv('deliveries.csv')
 matches = pd.read_csv('matches.csv')
 
-matches_2019 = matches[matches['season'] >= 2018]
+matches_2019 = matches[matches['season'] == 2019]
 
 mat_19 = []
 
@@ -12,7 +12,7 @@ for i in range(len(matches_2019)):
 
 deliveries_2019 = deliveries[deliveries['match_id'].isin(mat_19)]
 
-batsman = 'RR Pant'
+batsman = 'KL Rahul'
 
 batsman_data = deliveries_2019[deliveries_2019['batsman'] == batsman]
 batsman_data = batsman_data[batsman_data['wide_runs'] == 0]
