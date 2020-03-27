@@ -37,7 +37,7 @@ for bat in batsmen:
 
     for i in range(len(bat_deliveries)):
         runs += bat_deliveries.iloc[i,15] - bat_deliveries.iloc[i,16]
-        if(type(deliveries.iloc[i,18])==str and deliveries.iloc[i,19]!='run out'):
+        if(type(bat_deliveries.iloc[i,18])==str and bat_deliveries.iloc[i,19]!='run out'):
             dismissals += 1
         
     batsman_data.append([bat,runs,len(bat_deliveries),dismissals, \
