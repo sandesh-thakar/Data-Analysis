@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 deliveries = pd.read_csv('Data/deliveries.csv')
 matches = pd.read_csv('Data/matches.csv')
 
-matches = matches[matches['season'] == 2019]
+matches = matches[matches['season'] == 2018]
 
 mat = []
 
@@ -19,7 +19,6 @@ deliveries = deliveries[deliveries['wide_runs']==0]
 
 batsmen = set()
 batsman_data = []
-
 
 for i in range(len(deliveries)):
     batsmen.add(deliveries.iloc[i,6])
