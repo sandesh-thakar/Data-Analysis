@@ -8,6 +8,7 @@ def fitRegressor():
     deliveries = pd.read_csv('Data/deliveries.csv')
     matches = pd.read_csv('Data/matches.csv')
     
+    matches = matches[matches['season'] >= 2015]
     matches = matches[matches['season'] <= 2018]
     
     mat = []
@@ -136,9 +137,22 @@ X,y = getTestData()
 y_actual = list(y)
 y_pred = list(regressor.predict(X))
 
-error = 0
+rmse = 0
 
 for i in range(len(y_actual)):
-    error += abs(y_actual[i]-y_pred[i])
+    rmse += (y_actual[i]-y_pred[i])**2
     
-error = error/len(y_actual)
+rmse = (rmse/len(y_actual))**0.5
+
+matches = pd.read_csv('Data/matches.csv')
+
+prediction_data = []
+
+for i in range(len(X)):
+    mat = matches[matches['id']==X.iloc[i,0]]
+    prediction_data.append([mat.iloc[0,4],mat.iloc[0,5],\
+                            round(y_pred[i]),y_actual[i],-round(y_pred[i])+y_actual[i]])
+    
+prediction_data = pd.DataFrame(prediction_data,columns=['team1','team2',\
+                                                        'predicted_total',\
+                                                        'actual_total','difference'])
