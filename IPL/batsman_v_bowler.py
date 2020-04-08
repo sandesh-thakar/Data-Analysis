@@ -4,11 +4,12 @@ deliveries = pd.read_csv('Data/deliveries.csv')
 matches = pd.read_csv('Data/matches.csv')
 
 matches = matches[matches['season'] >= 2008]
-
+match_season = dict()
 mat = []
 
 for i in range(len(matches)):
     mat.append(matches.iloc[i,0])
+    match_season[matches.iloc[i,0]] = matches.iloc[i,1]
     
 deliveries = deliveries[deliveries['match_id'].isin(mat)]
 deliveries = deliveries[deliveries['inning']<=2]
