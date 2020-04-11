@@ -13,25 +13,19 @@ cols.append('bowling_team')
 cols.append('over')
 cols.append('ball')
 cols.append('batsman')
-#cols.append('non_striker')
 cols.append('bowler')
-#cols.append('is_super_over')
 cols.append('wide_runs')
 cols.append('bye_runs')
 cols.append('legbye_runs')
 cols.append('noball_runs')
-#cols.append('penalty_runs')
-#cols.append('batsman_runs')
 cols.append('total_runs')
 cols.append('extra_runs')
 cols.append('player_dismissed')
 cols.append('dismissal_kind')
 
-series = 18547
+series = 18610
 
-mat = [1,2,4,5,7]
-
-mat = [m+1133816 for m in mat]
+mat = [1141232]
 
 for match_id in mat:
     for inning in range(1,3):
@@ -67,14 +61,11 @@ for match_id in mat:
                 temp.append(int(str(ball['over']['actual']).split('.')[0])+1)
                 temp.append(ball['over']['ball'])
                 temp.append(ball['batsman']['athlete']['name'])
-                #temp.append(ball['otherBatsman']['athlete']['name'])
                 temp.append(ball['bowler']['athlete']['name'])
-                #temp.append(0)
                 temp.append(ball['over']['wide'])
                 temp.append(ball['over']['byes'])
                 temp.append(ball['over']['legByes'])
                 temp.append(ball['over']['noBall'])
-                #temp.append(0)
                 
                 val = ball['scoreValue']
                 
@@ -84,7 +75,6 @@ for match_id in mat:
                 if(extras>val):
                     val=extras
                 
-                #temp.append(val)
                 temp.append(val)
                 temp.append(extras)
                 
@@ -95,7 +85,6 @@ for match_id in mat:
                 temp.append(ball['dismissal']['type'])
                 
                 if(ball['dismissal']['type']=='run out'):
-                    #print(ball['otherBatsman']['athlete']['shortName'],ball['dismissal']['text'].split('(')[0])
                     if(ball['otherBatsman']['athlete']['shortName'] in ball['dismissal']['text'].split('(')[0]):
                         temp[14]=ball['otherBatsman']['athlete']['name']
                 
@@ -104,6 +93,7 @@ for match_id in mat:
                 print(match_id,inning,ball['id'],e)
 
 data = pd.DataFrame(data,columns=cols)    
+data = data[data['batsman']=='Dinesh Karthik']
 
 for bat in list(data['batsman'].unique()):
     bat_data = data[data['batsman']==bat]
