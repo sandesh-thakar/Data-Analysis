@@ -2,10 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-deliveries = pd.read_csv('deliveries.csv')
-matches = pd.read_csv('matches.csv')
+deliveries = pd.read_csv('Data/deliveries.csv')
+matches = pd.read_csv('Data/matches.csv')
 
-matches = matches[matches['season'] >= 2018]
+matches = matches[matches['season'] >= 2017]
 
 mat = []
 
@@ -31,6 +31,12 @@ for i in range(len(deliveries)):
 batsmen = list(batsmen)
 
 batsman_data = []
+
+spin = pd.read_csv('Data/spin.csv')
+spin = [spin.iloc[i,1] for i in range(len(spin))]
+
+pace = pd.read_csv('Data/pace.csv')
+pace = [pace.iloc[i,1] for i in range(len(pace))]
 
 for bat in batsmen:
     bat_deliveries = deliveries[deliveries['batsman']==bat]
@@ -70,7 +76,8 @@ for i in range(len(batsman_data)):
     name = batsman_data.iloc[i,0]
     x = batsman_data.iloc[i,1]*100/batsman_data.iloc[i,2]
     y = batsman_data.iloc[i,3]*100/batsman_data.iloc[i,4]
-    if(x>=150 or y>=150):
+    if(name=='RR Pant' or name=='SP Narine'):
+        print(x,y)
         plt.scatter(x,y,s=20,color='red')
         plt.text(x+0.5, y-0.5, name, fontsize=20,weight='bold')
     else:
@@ -82,4 +89,4 @@ plt.ylabel('Pace',fontsize=15)
 plt.axvline(x=150,linestyle='--',linewidth=1.0,color='black')
 plt.axhline(y=150,linestyle='--',linewidth=1.0,color='black')
 
-plt.title('Pace SR v Spin SR in IPL since 2018(min 200 runs against both)',fontsize=22.5,weight='bold')
+plt.title('Pace SR v Spin SR in IPL since 2017(min 200 runs against both)',fontsize=22.5,weight='bold')

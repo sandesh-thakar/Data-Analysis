@@ -1,0 +1,6 @@
+match_id,inning,batting_team,bowling_team,over,ball,batsman,bowler,wide_runs,bye_runs,legbye_runs,noball_runs,total_runs,extra_runs,player_dismissed,dismissal_kind
+1141232,2,World-XI,West Indies,3,2,Dinesh Karthik,Samuel Badree,0,0,0,0,0,0,,
+1141232,2,World-XI,West Indies,3,3,Dinesh Karthik,Samuel Badree,0,0,0,0,0,0,,
+1141232,2,World-XI,West Indies,3,4,Dinesh Karthik,Samuel Badree,0,0,0,0,0,0,,
+1141232,2,World-XI,West Indies,3,5,Dinesh Karthik,Samuel Badree,0,0,0,0,0,0,,
+1141232,2,World-XI,West Indies,3,6,Dinesh Karthik,Samuel Badree,0,0,0,0,0,0,Dinesh Karthik,caught
