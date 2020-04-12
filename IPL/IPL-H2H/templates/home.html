@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+   	<title>IPL H2H Stats</title>	
+   	<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  </head>
+  <body>
+    <h2>IPL Head-to-Head Stats</h2>
+   
+   <div class="input-form">
+    	<form action = "/" method="post">
+    		<div class="input-element">
+	    		<label for="batsman">Batsman</label><br>
+	    		<input name="batsman" list="batnames" value="{{lastBat}}">
+	    			<datalist id="batnames">
+	    				{% for bat in batnames %}
+        					<option value="{{bat}}"</option>
+    					{% endfor %}
+	    			</datalist>
+	    		</input><br>
+	    	</div>
+	    	
+	    	<div class="input-element">
+	    		<label for="bowler">Bowler</label><br>
+	    		<input name="bowler" list="bowlnames" value="{{lastBowl}}">
+	    			<datalist id="bowlnames">
+	    				{% for bowl in bowlnames %}
+        					<option value="{{bowl}}"</option>
+    					{% endfor %}
+	    			</datalist>
+	    		</input><br>
+	    	</div>
+	    	
+	    	<div class="input-element">
+	    		<label for="from">From</label><br>
+	    		<input name="from" list="fromlist" value="{{lastFor}}">
+	    			<datalist id="fromlist">
+	    				{% for y in years %}
+        					<option value="{{y}}"</option>
+    					{% endfor %}
+	    			</datalist>
+	    		</input><br>
+	    	</div>	
+	    	
+	    	<div class="input-element">
+	    		<label for="to">To</label><br>
+	    		<input name="to" list="tolist" value="{{lastTo}}">
+	    			<datalist id="tolist">
+	    				{% for y in years %}
+        					<option value="{{y}}"</option>
+    					{% endfor %}
+	    			</datalist>
+	    		</input><br>
+	    	</div>
+	    	
+	    	<div class="submit-button">
+	    		<p><input type="submit" value="Submit" /></p>
+	    	</div>		
+    	</form>
+    </div>
+	<hr>
+    
+    <div class="result-header">
+    	<h3>{{batsman}} v {{bowler}}</h3>
+    </div>
+  
+  	<div class="result-data">
+  		<label id='runs'>Runs: </label>
+        <label id='runsvalue'>{{runs}}</label><br>
+       
+        <label id='balls'>Balls: </label>
+        <label id='ballsvalue'>{{balls}}</label><br>
+                    
+        <label id='dismissals'>Dismissals: </label>
+        <label id='dismissalsvalue'>{{dismissals}}</label><br>
+                    
+        <label id='sr'>SR: </label>
+        <label id='srValue'>{{sr}}</label><br>
+                    
+        <label id='avg'>Average: </label>
+        <label id='avgValue'>{{avg}}</label><br>
+  	</div>
+
+  </body>
+</html>

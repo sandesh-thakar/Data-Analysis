@@ -1,0 +1,37 @@
+h2 {
+	color:black;
+	text-align:center; 
+	font-family:georgia;
+	font-size:30px;
+}
+
+.input-form {
+	text-align:center;
+	font-family:roboto;
+}
+
+.input-element {
+	padding-top:5px;
+}
+
+.submit-button p input {
+	font-size:16px;
+	font-family:verdana;
+}
+
+.result-header h3{
+	color:black;
+	text-align:center; 
+	font-family:roboto;
+	font-size:22px;
+}
+
+.result-data{
+	text-align:center;
+}
+
+.result-data label{
+	font-size:20px;
+	padding-bottom:8px;
+	font-family:lato;
+}
